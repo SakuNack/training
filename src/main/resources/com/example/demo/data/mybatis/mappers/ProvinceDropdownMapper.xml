@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.data.mybatis.mappers.ProvinceDropdownMapper">
+    <select id="findAllProvinces" resultType="com.example.demo.data.mybatis.models.DropdownModel" parameterType="map">
+        SELECT *
+        FROM TB_M_DROP_DOWN
+        <where>
+            AND CATEGORIES ='PROVINCE'
+            <if test="activeFlag!=null and activeFlag!=''">   AND ACTIVE_FLAG = #{activeFlag}</if>
+        </where>
+        ORDER BY PRIORITY_ORDER ASC
+    </select>
+    <select id="findAllProvincesIn" resultType="com.example.demo.data.mybatis.models.DropdownModel" parameterType="map">
+        SELECT *
+        FROM TB_M_DROP_DOWN
+        <where>
+            AND CATEGORIES ='PROVINCE'
+            <if test="activeFlag!=null and activeFlag!=''">
+            AND ACTIVE_FLAG = #{activeFlag}
+            </if>
+            <if test="valTexts !=null">
+                <foreach item="item" index="index" collection="valTexts" open=" AND VAL_TEXT in (" separator="," close=")" nullable="true">
+                    #{item}
+                </foreach>
+            </if>
+        </where>
+        ORDER BY PRIORITY_ORDER ASC
+    </select>
+</mapper>

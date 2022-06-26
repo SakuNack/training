@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.data.mybatis.mappers.DropdownMasterMapper">
+    <insert id="insert" parameterType="com.example.demo.data.mybatis.models.DropdownModel">
+        INSERT INTO DEMO.TB_M_DROP_DOWN (
+        CATEGORIES, VAL_TEXT, LABEL_TEXT,
+        PRIORITY_ORDER, ACTIVE_FLAG)
+        VALUES ( #{categories},
+        #{valText},
+        #{labelText},
+        #{priorityOrder},
+        #{activeFlag} )
+    </insert>
+    <select id="findAllActive" resultType="com.example.demo.data.mybatis.models.DropdownModel">
+        SELECT *
+        FROM TB_M_DROP_DOWN
+        <where>
+            AND ACTIVE_FLAG='Y'
+        </where>
+    </select>
+</mapper>
